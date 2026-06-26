@@ -2,51 +2,47 @@
 
 This document outlines the testing principles and best practices for this project.
 
+## Core Principles
+
+- All new features should include appropriate tests.
+- Tests should be maintainable and follow best practices.
+- All tests must be isolated and independent. Each test should set up its own data and must not rely on other tests.
+- Setup and teardown hooks are required so tests succeed consistently across multiple runs.
+- Tests should be runnable in any order and produce consistent results.
+
 ## Unit Tests
 
-- **Framework**: Use Jest to test individual functions and React components in isolation
-- **Naming Convention**: Files should follow `*.test.js` or `*.test.ts` naming pattern
-- **Backend Location**: Place backend unit tests in `packages/backend/__tests__/` directory
-- **Frontend Location**: Place frontend unit tests in `packages/frontend/src/__tests__/` directory
-- **File Naming**: Name unit test files to match what they're testing (e.g., `app.test.js` for testing `app.js`)
+- Use Jest to test individual functions and React components in isolation.
+- Unit tests should use the naming convention `*.test.js` or `*.test.ts`.
+- Backend unit tests should be placed in `packages/backend/__tests__/`.
+- Frontend unit tests should be placed in `packages/frontend/src/__tests__/`.
+- Name unit test files to match what they are testing (for example, `app.test.js` for `app.js`).
 
 ## Integration Tests
 
-- **Framework**: Use Jest + Supertest to test backend API endpoints with real HTTP requests
-- **Location**: Place integration tests in `packages/backend/__tests__/integration/` directory
-- **Naming Convention**: Files should follow `*.test.js` or `*.test.ts` naming pattern
-- **File Naming**: Name integration test files intelligently based on what they test (e.g., `todos-api.test.js` for TODO API endpoints)
+- Use Jest and Supertest to test backend API endpoints with real HTTP requests.
+- Integration tests should be placed in `packages/backend/__tests__/integration/`.
+- Integration tests should use the naming convention `*.test.js` or `*.test.ts`.
+- Name integration test files based on what they validate (for example, `todos-api.test.js` for TODO API endpoints).
 
 ## End-to-End (E2E) Tests
 
-- **Framework**: Use Playwright (the required framework) to test complete UI workflows through browser automation
-- **Location**: Place E2E tests in `tests/e2e/` directory
-- **Naming Convention**: Files should follow `*.spec.js` or `*.spec.ts` naming pattern
-- **File Naming**: Name E2E test files based on the user journey they test (e.g., `todo-workflow.spec.js`)
-- **Browser Configuration**: Playwright tests must use one browser only
-- **Design Pattern**: Playwright tests must use the Page Object Model (POM) pattern for maintainability
-- **Test Scope**: Limit E2E tests to 5-8 critical user journeys - focus on happy paths and key edge cases, not exhaustive coverage
+- Use Playwright as the required framework to test complete UI workflows through browser automation.
+- E2E tests should be placed in `tests/e2e/`.
+- E2E tests should use the naming convention `*.spec.js` or `*.spec.ts`.
+- Name E2E test files based on the user journey they test (for example, `todo-workflow.spec.js`).
+- Playwright tests must use one browser only.
+- Playwright tests must use the Page Object Model (POM) pattern for maintainability.
+- Limit E2E tests to 5-8 critical user journeys, focusing on happy paths and key edge cases.
 
-## General Testing Principles
+## Port Configuration
 
-### Test Isolation and Independence
+- Always use environment variables with sensible defaults for port configuration.
+- Backend port example:
 
-- **All tests must be isolated and independent** - each test should set up its own data and not rely on other tests
-- Tests should be able to run in any order and produce consistent results
+```js
+const PORT = process.env.PORT || 3030;
+```
 
-### Setup and Teardown
-
-- **Setup and teardown hooks are required** - tests must succeed on multiple runs
-- Ensure proper cleanup of resources and test data after each test
-
-### Port Configuration
-
-- **Always use environment variables with sensible defaults** for port configuration to allow CI/CD workflows to dynamically detect ports
-- **Backend**: `const PORT = process.env.PORT || 3030;`
-- **Frontend**: React's default port is 3000, but can be overridden with `PORT` environment variable
-
-## Feature Development Requirements
-
-- **All new features should include appropriate tests** based on the type of feature
-- Tests should be maintainable and follow best practices
-- Consider testing all layers: unit, integration, and E2E as appropriate for the feature
+- Frontend default port is 3000, but it can be overridden with the `PORT` environment variable.
+- Using environment-based ports enables CI/CD workflows to dynamically detect and use available ports.
