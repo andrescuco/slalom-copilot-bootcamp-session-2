@@ -2,7 +2,7 @@ class TodoPage {
   constructor(page) {
     this.page = page;
     this.titleInput = page.getByRole('textbox', { name: 'Todo title' });
-    this.dueDateInput = page.getByLabel('Due date');
+    this.dueDateInput = page.getByRole('textbox', { name: 'Due date' });
     this.addButton = page.getByRole('button', { name: 'Add Todo' });
   }
 
@@ -21,6 +21,10 @@ class TodoPage {
 
   todoText(title) {
     return this.page.getByText(title, { exact: true });
+  }
+
+  todoItem(title) {
+    return this.page.getByRole('listitem').filter({ hasText: title });
   }
 
   editButton(title) {

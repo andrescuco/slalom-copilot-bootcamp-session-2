@@ -20,7 +20,8 @@ test.describe('TODO validation', () => {
     const title = `E2E due date ${Date.now()}`;
 
     await todoPage.addTodo(title, '2026-11-15');
-    await expect(todoPage.todoText(title)).toBeVisible();
-    await expect(page.getByText('Due: 2026-11-15')).toBeVisible();
+    const item = todoPage.todoItem(title);
+    await expect(item).toBeVisible();
+    await expect(item.getByText('Due: 2026-11-15')).toBeVisible();
   });
 });
