@@ -8,6 +8,8 @@ This file contains high-level instructions for GitHub Copilot to follow when gen
 
 The project documentation will be built during the bootcamp sessions.
 
-- [Project Overview](../docs/project-overview.md) - Overview of the project
-- [Functional Requirements](../docs/functional-requirements.md) - Core TODO app requirements
+ - [Testing Guidelines](../docs/testing-guidelines.md) - Testing principles and best practices
 - [UI Guidelines](../docs/ui-guidelines.md) - Core UI and accessibility guidelines
+=======
+- [Testing Guidelines](../docs/testing-guidelines.md) - Testing principles and best practices
+>>>>>>> 8b65e27 (docs: add testing guidelines and update copilot instructions)
